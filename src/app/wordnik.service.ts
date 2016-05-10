@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {Observable} from 'rxjs';
+
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 @Injectable()
 export class WordnikService {
@@ -24,13 +26,15 @@ export class WordnikService {
       throw new Error('Bad response status: ' + res.status);
     }
     let body = res.json();
+
+    console.log('Wordnik', body.word);
     return body.word || {};
   }
-  
+
   handleError(error: any) {
     let errMsg = error.message || 'Server error';
     console.error(errMsg);
-    
+
     return Observable.throw(errMsg);
   }
 }
