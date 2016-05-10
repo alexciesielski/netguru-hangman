@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {WordnikService} from './wordnik.service';
+import {HangmanComponent} from './hangman';
 
 @Component({
   moduleId: module.id,
   selector: 'netguru-hangman-app',
   templateUrl: 'netguru-hangman.component.html',
   styleUrls: ['netguru-hangman.component.css'],
+  directives: [HangmanComponent],
   providers: [WordnikService]
 })
 
@@ -25,7 +27,8 @@ export class NetguruHangmanAppComponent implements OnInit {
 
   newGame() {
     this.word = '';
-    this.subscribeToRandomWordnik();
+    
+    //this.subscribeToRandomWordnik();
   }
 
   subscribeToRandomWordnik() {
