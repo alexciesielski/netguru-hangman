@@ -1,12 +1,21 @@
 <div class="main">
 
-  <div class="toolbar">
-    <button (click)="newGame()">New Game</button>
-  </div>
+  <div class="hangman-canvas" (keyup)="onKey($event)" (keypress)="onKey($event)">
 
-  <div class="hangman-canvas">
+    <app-missed-letters [missedLetters]="missedLetters"></app-missed-letters>
 
-    <app-hangman></app-hangman>
+    <app-hangman [wrongGuesses]="wrongGuesses"></app-hangman>
+
+    <div class="guess-word">
+      <div class="guess-letter" *ngFor="let letter of wordToGuess" [ngClass]="{guessed: isLetterInCorrectlyGuessedLetters(letter)}">
+        <div *ngIf="isLetterInCorrectlyGuessedLetters(letter)">{{letter}}</div>
+      </div>
+    </div>
 
   </div>
 </div>
+
+<dialog id="gameoverModal" class="modal">
+  <h2>GAME OVER</h2>
+  <button (click)="newGame()">NEW GAME</button>
+</dialog>

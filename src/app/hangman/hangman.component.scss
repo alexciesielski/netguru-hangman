@@ -1,3 +1,113 @@
+$bar: 448px;
+$corpus: 105px;
+$head: 192px;
+$left-arm: 126px;
+$left-foot: 84px;
+$left-hand: 30px;
+$left-leg: 82px;
+$neck: 46px;
+$right-arm: 126px;
+$right-foot: 84px;
+$right-hand: 30px;
+$right-leg:82px;
+
+$bar-width: 200px;
+$bar-hook: 180px;
+$leftmargin: 20px;
+
+$middle: $bar-hook - $leftmargin;
+
+.hangman {
+    width: 400px;
+}
+
 .bar {
-    margin-left: -100px;
+    margin-left: -$leftmargin;
+    width: $bar-width;
+    
+    img {
+    width: $bar-width;
+    height: auto;
+    }
+}
+
+.body-top {
+    position: relative;
+    height: 220px;
+    top: -10px;
+    
+    div {
+        position: absolute;
+    }
+    
+    .head {
+        left:$middle - ($head / 2);
+    }
+
+    .neck {
+        left:$middle - ($neck / 2);
+        top: 160px;
+        //border:1px solid grey;
+    }
+}
+
+.body-middle {
+    position: relative;
+    top: -10px;
+    height: 165px; //corpus height
+    
+    div {
+        position: absolute;
+    }
+    
+    .corpus {
+        left: $middle - ($corpus / 2);
+    }
+    
+    .left-arm {
+        left: $middle - ($corpus / 2) - ($left-arm * (3/4) - 8px);
+    }
+    
+    .right-arm {
+        left: $middle + ($corpus / 2) - ($right-arm * (1/4) + 8px);
+    }
+    
+    .left-hand {
+        top: 100px;
+        left: $middle - ($corpus / 2) - ($left-arm * 3/4);
+    }
+    
+    .right-hand {
+        top: 100px;
+        left: $middle + ($corpus / 2) + ($right-arm / 2);
+    }
+}
+
+.body-bottom {
+    position: relative;
+    height: 180px; //leg height + x px
+    top: -25px;
+    
+    div {
+        position: absolute;
+    }
+    
+    .left-leg {
+        left: $middle - ($corpus / 2) - ($left-leg * (1/2) - 7px);
+    }
+    
+    .right-leg {
+        left: $middle + ($corpus / 2) - ($right-leg * (1/2) + 7px);
+    }
+    
+    .left-foot {
+        top: 150px;
+        left: 35px;
+    }
+    
+    .right-foot {
+        top: 150px;
+        left: 195px;
+    }
+    
 }

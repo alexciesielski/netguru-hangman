@@ -1,23 +1,98 @@
+@font-face {
+    font-family: AllerDisplay;
+    src: url('../assets/fonts/AllerDisplay.ttf');
+}
+
 .main {
+    font-family: AllerDisplay;
+    
     background-color: #3B4163;
     width: 100%;
     height: 100%;
-    
     padding: 8px;
     
     .toolbar {
         padding:8px;
     }
     
-    .hangman-canvas {
+    .hangman-canvas {        
         background-color: #F5F5F5;
         border-radius:4px;
         width: 80%;
         height: 80%;
         margin: 0 auto;
-        
         padding: 20px;
     }
 }
 
+.guess-word {
+    display: flex;
+    flex-direction: row;
+}
 
+.guess-letter {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    padding: 10px;
+    text-align: center;
+    margin: 5px;
+    border-radius: 4px;
+    background-color: lightgrey;
+    text-transform: capitalize;
+    
+    /*display: inline-block;
+     
+    
+    div {
+    
+    }*/
+}
+
+.guessed {
+    color: white;
+    background-color: darkslategrey;
+}
+
+.modal{
+  font-family: AllerDisplay;
+  font-size: 40px;
+  color: white; 
+  background: transparent;
+  border: none;
+  text-align: center;
+  height:300px;
+  width:500px;
+
+  /* change position to fixed if you want to prevent the dialog from scrolling away, and center it */
+  position:fixed;
+  top:50%;
+  left:50%;
+  margin-left: -250px;
+  margin-top:-150px;
+  
+  button {
+      font-size: 30px;
+      font-weight: bold;
+      background:transparent;
+      color: gold;
+      border-radius:40px;
+      border: 3px dashed gold;
+      padding: 30px;
+  }
+  
+  button:hover {
+      color:darken(gold, 5%);
+      border-color: darken(gold, 5%);
+  }
+  
+}
+
+.modal::backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,50,0.5);
+}
