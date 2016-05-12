@@ -1,4 +1,4 @@
-# netguru-hangman
+# angular2-hangman
 
 Angular 2 Hangman game developed to apply for Frontend-Developer position at netguru.co
 
