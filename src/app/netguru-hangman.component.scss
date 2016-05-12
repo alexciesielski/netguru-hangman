@@ -7,7 +7,10 @@
     font-family: AllerDisplay;
     margin: 8px;
     
-    background-color: #F5F5F5;
+    background:#F5F5F5 url('../assets/img/bg.png');
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    
     border-radius:4px;
     width: 80%;
     height: 80%;

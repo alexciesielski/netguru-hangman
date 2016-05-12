@@ -61,7 +61,10 @@ export class NetguruHangmanAppComponent implements OnInit {
         this.wordToGuessLength = word.length;
         this.wordToGuess = word.toLowerCase().split('');
       },
-      (error) => this.error = error
+      (error) => {
+        this.error = error;
+        this.showModal(error);
+      }
     );
   }
 
@@ -116,6 +119,7 @@ export class NetguruHangmanAppComponent implements OnInit {
       let dialog: any = document.getElementById('gameoverModal');
       dialog.showModal();
       this.dialogOpen = true;
+      this.isGameRunning = false;
       this.modalText = modalText;
     }
   }

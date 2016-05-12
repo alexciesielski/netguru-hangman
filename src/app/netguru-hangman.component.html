@@ -1,5 +1,5 @@
 <div class="main">
-
+  
   <div class="hangman-canvas">
 
     <app-hangman [wrongGuesses]="wrongGuesses"></app-hangman>
@@ -18,6 +18,7 @@
 <div class="valign">
   <dialog id="gameoverModal" class="modal">
     <h2>{{modalText}}</h2>
+    <p *ngIf="wordToGuess">You were looking for: {{wordToGuess.join('')}}</p>
     <button (click)="newGame()">New Word</button>
   </dialog>
 </div>
