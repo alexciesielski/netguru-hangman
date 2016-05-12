@@ -7,7 +7,7 @@
 
   </div>
 
-  <div class="guess-word" style="align-self:end">
+  <div class="guess-word">
     <div class="guess-letter" *ngFor="let letter of wordToGuess" [ngClass]="{guessed: isLetterInCorrectlyGuessedLetters(letter)}">
       <div *ngIf="isLetterInCorrectlyGuessedLetters(letter)">{{letter}}</div>
     </div>

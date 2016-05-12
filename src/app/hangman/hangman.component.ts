@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -6,12 +6,9 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: 'hangman.component.html',
   styleUrls: ['hangman.component.css']
 })
-export class HangmanComponent implements OnInit {
+export class HangmanComponent {
   @Input() wrongGuesses: number = 0;
 
   constructor() {}
-
-  ngOnInit() {
-  }
 
 }

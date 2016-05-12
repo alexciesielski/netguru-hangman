@@ -1,25 +1,29 @@
-$bar: 448px;
 $corpus: 105px;
 $head: 192px;
-$left-arm: 126px;
-$left-foot: 84px;
-$left-hand: 30px;
-$left-leg: 82px;
+$arm: 126px;
+$foot: 84px;
+$hand: 30px;
+$leg: 82px;
 $neck: 46px;
-$right-arm: 126px;
-$right-foot: 84px;
-$right-hand: 30px;
-$right-leg:82px;
+
+$corpus-height: 165px;
+$head-height: 212px;
+$neck-height: 67px;
+$arm-height: 122px;
+$leg-height: 178px;
+$foot-height: 36px;
 
 $bar-width: 200px;
 $bar-hook: 180px;
 $leftmargin: 20px;
 
+// by how much to pull up the body parts
+$pull-up: 20px;
+
+// middle of body, where the head is connected to the bar-hook
 $middle: $bar-hook - $leftmargin;
 
-.hangman {
-    width: 400px;
-}
+
 
 .bar {
     margin-left: -$leftmargin;
@@ -33,8 +37,8 @@ $middle: $bar-hook - $leftmargin;
 
 .body-top {
     position: relative;
-    height: 220px;
-    top: -10px;
+    height: $head-height - $pull-up + $neck-height/2;
+    top: -$pull-up;
     
     div {
         position: absolute;
@@ -46,15 +50,14 @@ $middle: $bar-hook - $leftmargin;
 
     .neck {
         left:$middle - ($neck / 2);
-        top: 160px;
-        //border:1px solid grey;
+        top: $head-height - $neck-height + $pull-up;
     }
 }
 
 .body-middle {
     position: relative;
-    top: -10px;
-    height: 165px; //corpus height
+    top: -$pull-up;
+    height: $corpus-height; //corpus height
     
     div {
         position: absolute;
@@ -65,48 +68,48 @@ $middle: $bar-hook - $leftmargin;
     }
     
     .left-arm {
-        left: $middle - ($corpus / 2) - ($left-arm * (3/4) - 8px);
+        left: $middle - ($corpus / 2) - ($arm * (3/4) - 8px);
     }
     
     .right-arm {
-        left: $middle + ($corpus / 2) - ($right-arm * (1/4) + 8px);
+        left: $middle + ($corpus / 2) - ($arm * (1/4) + 8px);
     }
     
     .left-hand {
-        top: 100px;
-        left: $middle - ($corpus / 2) - ($left-arm * 3/4);
+        top: $arm-height - $pull-up;
+        left: $middle - ($corpus / 2) - ($arm * 3/4);
     }
     
     .right-hand {
-        top: 100px;
-        left: $middle + ($corpus / 2) + ($right-arm / 2);
+        top: $arm-height - $pull-up;
+        left: $middle + ($corpus / 2) + ($arm / 2);
     }
 }
 
 .body-bottom {
     position: relative;
-    height: 180px; //leg height + x px
-    top: -25px;
+    height: $leg-height;
+    top: -$pull-up * 2;
     
     div {
         position: absolute;
     }
     
     .left-leg {
-        left: $middle - ($corpus / 2) - ($left-leg * (1/2) - 7px);
+        left: $middle - ($corpus / 2) - ($leg * (1/2) - 7px);
     }
     
     .right-leg {
-        left: $middle + ($corpus / 2) - ($right-leg * (1/2) + 7px);
+        left: $middle + ($corpus / 2) - ($leg * (1/2) + 7px);
     }
     
     .left-foot {
-        top: 150px;
-        left: 35px;
+        top: $leg-height - $pull-up*2 + $foot-height/2;
+        left: 36px;
     }
     
     .right-foot {
-        top: 150px;
+        top: $leg-height - $pull-up*2 + $foot-height/2;
         left: 195px;
     }
     

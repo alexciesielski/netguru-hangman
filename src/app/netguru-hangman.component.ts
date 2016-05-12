@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {WordnikService} from './wordnik.service';
 import {HangmanComponent} from './hangman';
 import {MissedLettersComponent} from './missed-letters';
-import {GuessWordComponent} from './guess-word';
 
 @Component({
   moduleId: module.id,
   selector: 'netguru-hangman-app',
   templateUrl: 'netguru-hangman.component.html',
   styleUrls: ['netguru-hangman.component.css'],
-  directives: [HangmanComponent, MissedLettersComponent, GuessWordComponent],
+  directives: [HangmanComponent, MissedLettersComponent],
   providers: [WordnikService],
-  host: { 'class' : 'ng-animate main', '(window:keydown)': 'onKey($event.keyCode)' }
+  host: { '(window:keydown)': 'onKey($event.keyCode)' }
 })
 
 // https://github.com/netguru/frontend-recruitment-task
@@ -41,8 +40,6 @@ export class NetguruHangmanAppComponent implements OnInit {
   }
 
   newGame() {
-
-    this.closeModal();
     this.guesses = 0;
     this.wrongGuesses = 0;
     this.wordToGuessLength = 0;
@@ -52,7 +49,7 @@ export class NetguruHangmanAppComponent implements OnInit {
     this.missedLetters = new Array();
 
     this.getNewWord();
-    this.isGameRunning = true;
+    this.closeModal();
   }
 
   getNewWord() {
@@ -60,6 +57,12 @@ export class NetguruHangmanAppComponent implements OnInit {
       (word: string) => {
         this.wordToGuessLength = word.length;
         this.wordToGuess = word.toLowerCase().split('');
+        if (word.indexOf('-') > -1 || word.indexOf(' ') > -1) {
+          console.log('Wordnik returned word containing dash/space, requesting new word.');
+          this.newGame();
+        } else {
+          this.isGameRunning = true;
+        }
       },
       (error) => {
         this.error = error;
@@ -69,44 +72,57 @@ export class NetguruHangmanAppComponent implements OnInit {
   }
 
   onKey(keycode) {
-    if (this.isPressedKeyLetter(keycode) && this.isGameRunning) {
+    if (this.isGameRunning && this.isPressedKeyLetter(keycode)) {
 
-      var letter = String.fromCharCode(keycode).toLowerCase();
       this.guesses++;
 
-      if (this.isLetterInWordToGuess(letter)) {
-        // guessed right
-        if (!this.isLetterInArray(letter, this.correctlyGuessedLetters)) {
-          this.correctlyGuessedLetters.push(letter);
-        }
+      var letter = String.fromCharCode(keycode).toLowerCase();
+      this.checkGuessedLetter(letter);
+      this.checkGameOver();
+    }
+  }
 
-      } else {
-        // guessed wrong
-        if (!this.isLetterInArray(letter, this.missedLetters)) {
-          this.wrongGuesses++;
-          this.missedLetters.push(letter);
-        }
+  checkGuessedLetter(letter: string) {
+    if (this.isGuessedRight(letter)) {
+      // guessed correctly
+
+      if (!this.isLetterInArray(letter, this.correctlyGuessedLetters)) {
+        // if letter not yet guessed, add it to guessed letters
+        this.correctlyGuessedLetters.push(letter);
       }
 
-      if (this.isLost()) {
-        this.showModal('Game over');
-      } else if(this.isWon()) {
-        this.showModal('Victory!');
+    } else {
+      // guessed wrong
+      if (!this.isLetterInArray(letter, this.missedLetters)) {
+        // if letter not yet in missed letters, add it to missed letters 
+        // and show next body part of hangman
+        this.wrongGuesses++;
+        this.missedLetters.push(letter);
       }
-      
+    }
+  }
+
+  checkGameOver() {
+    if (this.isLost()) {
+      this.showModal('Game over');
+    } else if (this.isWon()) {
+      this.showModal('Victory!');
     }
   }
 
   isWon(): boolean {
     let guessed = true;
+
+    // check if all letters from wordToGuess are in correctlyGuessedLetters
     for (let i = 0; i < this.wordToGuess.length; i++) {
       let letter = this.wordToGuess[i];
 
       if (this.correctlyGuessedLetters.indexOf(letter) === -1) {
+        // not yet won
         guessed = false;
       }
     }
-    
+
     return guessed;
   }
 
@@ -133,18 +149,19 @@ export class NetguruHangmanAppComponent implements OnInit {
   }
 
   isPressedKeyLetter(keycode: number) {
-    return keycode >= 65 && keycode <= 90;
+    // checks if pressed key is a letter from A to Z
+    return (keycode >= 65 && keycode <= 90);
   }
 
   isLetterInArray(letter: string, array: string[]) {
     return array.indexOf(letter) > -1;
   }
 
-  isLetterInWordToGuess(letter: string) {
-    return this.wordToGuess.indexOf(letter) > -1;
+  isGuessedRight(letter: string) {
+    return this.isLetterInArray(letter, this.wordToGuess);
   }
 
   isLetterInCorrectlyGuessedLetters(letter: string) {
-    return this.correctlyGuessedLetters.indexOf(letter) > -1;
+    return this.isLetterInArray(letter, this.correctlyGuessedLetters);
   }
 }
