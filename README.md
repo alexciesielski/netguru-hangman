@@ -14,24 +14,24 @@ npm, angular-cli, typings
 
 ## Installation
 
-1. Clone this repo
+###1 Clone this repo
 
-`git clone`
+`git clone https://github.com/ciesielskico/netguru-hangman.git`
 
-2. Changedirectory into repo folder
+###2 Changedirectory into repo folder
 
 `cd netguru-hangman`
 
-3. Install dependencies
+###3 Install dependencies
 
 `npm install`
 
-4. Serve the app
+###4 Serve the app
 
 `ng serve`
 
-5. Open app in browser
+###5 Open app in browser
 
 `localhost:4200`
 
-6. Use keyboard as controller
+###6 Use keyboard as controller
