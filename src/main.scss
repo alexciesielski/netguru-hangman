@@ -4,3 +4,11 @@ body {
     background-color: #3B4163;
     padding: 30px;
 }
+
+.valign {
+    display:flex;justify-content:center;align-items:center;width:100%;height:100%;
+}
+
+#spinner {
+    background-color: #F5F5F5; 
+}

@@ -3,7 +3,20 @@
     src: url('../assets/fonts/AllerDisplay.ttf');
 }
 
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+
 .main {
+    animation-name: fadeIn;
+    animation-duration: 4s;
+    
     font-family: AllerDisplay;
     margin: 8px;
     
@@ -51,7 +64,7 @@
 }
 
 .guessed {
-    color: white;
+    color: #F5F5F5;
     background-color: darkslategrey;
 }
 
@@ -59,30 +72,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .modal{
+    opacity: 1;
+    animation-name: fadeIn;
+    animation-duration: 4s;
+    
     border:1px solid red;
     
   font-family: AllerDisplay;
-  font-size: 40px;
+  
   color: white; 
   background: transparent;
   border: none;
   text-align: center;
   
-  width:33%;
-  height: 33%;
+  width:50%;
+  height: 50%;
   
-  /*
-  height:300px;
-  width:500px;
-
-  position:fixed;
-  top:50%;
-  left:50%;
-  margin-left: -250px;
-  margin-top:-150px;*/
+  p {
+      font-size:25px;
+  }
+  
+  h2 {
+      font-size: 40px;
+  }
   
   button {
       text-transform: capitalize;
@@ -99,9 +115,13 @@
       color:darken(gold, 5%);
       border-color: darken(gold, 5%);
   }
+  
+  button:focus {
+      outline: darken(gold, 35%);
+  }
 }
 
-.modal::backdrop {
+.modal::backdrop {    
   position: fixed;
   top: 0;
   left: 0;

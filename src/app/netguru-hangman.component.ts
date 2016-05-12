@@ -11,7 +11,7 @@ import {GuessWordComponent} from './guess-word';
   styleUrls: ['netguru-hangman.component.css'],
   directives: [HangmanComponent, MissedLettersComponent, GuessWordComponent],
   providers: [WordnikService],
-  host: { '(window:keydown)': 'onKey($event.keyCode)' }
+  host: { 'class' : 'ng-animate main', '(window:keydown)': 'onKey($event.keyCode)' }
 })
 
 // https://github.com/netguru/frontend-recruitment-task
