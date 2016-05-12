@@ -16,9 +16,10 @@ import {GuessWordComponent} from './guess-word';
 
 // https://github.com/netguru/frontend-recruitment-task
 export class NetguruHangmanAppComponent implements OnInit {
-
-  title = 'netguru-hangman';
+  title = 'Netguru Hangman';
   error: any = null;
+  modalText = 'Welcome to Hangman';
+  isGameRunning = false;
 
   wordToGuess: any[] = null;
   wordToGuessLength: number = 0;;
@@ -36,7 +37,7 @@ export class NetguruHangmanAppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.newGame();
+    this.showModal('Welcome to Hangman');
   }
 
   newGame() {
@@ -51,6 +52,7 @@ export class NetguruHangmanAppComponent implements OnInit {
     this.missedLetters = new Array();
 
     this.getNewWord();
+    this.isGameRunning = true;
   }
 
   getNewWord() {
@@ -64,7 +66,7 @@ export class NetguruHangmanAppComponent implements OnInit {
   }
 
   onKey(keycode) {
-    if (this.isPressedKeyLetter(keycode)) {
+    if (this.isPressedKeyLetter(keycode) && this.isGameRunning) {
 
       var letter = String.fromCharCode(keycode).toLowerCase();
       this.guesses++;
@@ -83,35 +85,39 @@ export class NetguruHangmanAppComponent implements OnInit {
         }
       }
 
-      if (this.isGameOver()) {
-        this.showModal();
+      if (this.isLost()) {
+        this.showModal('Game over');
+      } else if(this.isWon()) {
+        this.showModal('Victory!');
       }
+      
     }
   }
 
-  isGameOver() {
-    if (this.wrongGuesses < 11) {
-      // Game over
+  isWon(): boolean {
+    let guessed = true;
+    for (let i = 0; i < this.wordToGuess.length; i++) {
+      let letter = this.wordToGuess[i];
 
-      let guessed = true;
-      for (let i = 0; i < this.wordToGuess.length; i++) {
-        let letter = this.wordToGuess[i];
-
-        if (this.correctlyGuessedLetters.indexOf(letter) === -1) {
-          guessed = false;
-        }
+      if (this.correctlyGuessedLetters.indexOf(letter) === -1) {
+        guessed = false;
       }
-
-      return guessed;
     }
-
-    return true;
+    
+    return guessed;
   }
 
-  showModal() {
-    let dialog: any = document.getElementById('gameoverModal');
-    dialog.showModal();
-    this.dialogOpen = true;
+  isLost(): boolean {
+    return this.wrongGuesses === 11;
+  }
+
+  showModal(modalText) {
+    if (!this.dialogOpen) {
+      let dialog: any = document.getElementById('gameoverModal');
+      dialog.showModal();
+      this.dialogOpen = true;
+      this.modalText = modalText;
+    }
   }
 
   closeModal() {

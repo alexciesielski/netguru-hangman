@@ -1,21 +1,23 @@
 <div class="main">
 
-  <div class="hangman-canvas" (keyup)="onKey($event)" (keypress)="onKey($event)">
-
-    <app-missed-letters [missedLetters]="missedLetters"></app-missed-letters>
+  <div class="hangman-canvas">
 
     <app-hangman [wrongGuesses]="wrongGuesses"></app-hangman>
-
-    <div class="guess-word">
-      <div class="guess-letter" *ngFor="let letter of wordToGuess" [ngClass]="{guessed: isLetterInCorrectlyGuessedLetters(letter)}">
-        <div *ngIf="isLetterInCorrectlyGuessedLetters(letter)">{{letter}}</div>
-      </div>
-    </div>
+    <app-missed-letters [missedLetters]="missedLetters"></app-missed-letters>
 
   </div>
+
+  <div class="guess-word" style="align-self:end">
+    <div class="guess-letter" *ngFor="let letter of wordToGuess" [ngClass]="{guessed: isLetterInCorrectlyGuessedLetters(letter)}">
+      <div *ngIf="isLetterInCorrectlyGuessedLetters(letter)">{{letter}}</div>
+    </div>
+  </div>
+
 </div>
 
-<dialog id="gameoverModal" class="modal">
-  <h2>GAME OVER</h2>
-  <button (click)="newGame()">NEW GAME</button>
-</dialog>
+<div class="valign">
+  <dialog id="gameoverModal" class="modal">
+    <h2>{{modalText}}</h2>
+    <button (click)="newGame()">New Word</button>
+  </dialog>
+</div>

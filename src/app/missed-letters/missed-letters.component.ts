@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MissedLettersComponent implements OnInit {
   
-  @Input() missedLetters: string[]; // = ['a', 'b', 'c', 'd', 'e', 'f'];
+  @Input() missedLetters: string[] = []; // = ['a', 'b', 'c', 'd', 'e', 'f'];
 
   constructor() {}
 
