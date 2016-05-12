@@ -1,6 +1,7 @@
 # netguru-hangman
 
 Angular 2 Hangman game developed to apply for Frontend-Developer position at netguru.co
+
 Check out the demo at http://ciesielski.co/dev/netguru/
 
 - Developed with angular-cli (Angular 2 + TypeScript)
