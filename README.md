@@ -30,8 +30,6 @@ npm, angular-cli, typings
 
 `ng serve`
 
-###5 Open app in browser
+###5 Open app in browser and use keyboard as controller
 
 `localhost:4200`
-
-###6 Use keyboard as controller
